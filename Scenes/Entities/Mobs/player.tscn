@@ -1,0 +1,138 @@
+[gd_scene load_steps=12 format=3 uid="uid://beb4gcn3u16du"]
+
+[ext_resource type="Script" uid="uid://bbpavlx23k43q" path="res://Scripts/Entities/Mobs/Player/PlayerController.gd" id="1_jan3b"]
+[ext_resource type="Script" uid="uid://cv2c17ehg85d0" path="res://Scripts/Entities/Mobs/Player/PlayerView.gd" id="2_7evdk"]
+[ext_resource type="Resource" uid="uid://hjsacnwmbith" path="res://Data/player_config.tres" id="2_y8erv"]
+[ext_resource type="Script" uid="uid://bikp01o0euyks" path="res://Scripts/Entities/Mobs/Base/AttackArea.gd" id="4_pslna"]
+[ext_resource type="Script" uid="uid://bp84eqxhvxk7c" path="res://Scripts/Entities/Mobs/Base/HitArea.gd" id="5_8nlsj"]
+
+[sub_resource type="Animation" id="Animation_vmnvr"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_y8erv"]
+resource_name = "attack"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-16, 0), Vector2(24, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vmnvr"]
+_data = {
+&"RESET": SubResource("Animation_vmnvr"),
+&"attack": SubResource("Animation_y8erv")
+}
+
+[sub_resource type="Curve" id="Curve_7evdk"]
+_data = [Vector2(0.00568181, 0.0224719), 0.0, 0.0, 0, 0, Vector2(0.3125, 0.820225), 0.0, 0.0, 0, 0, Vector2(0.982955, 0.0786518), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_7evdk"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vk57k"]
+size = Vector2(32, 32)
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("view")]
+script = ExtResource("1_jan3b")
+config = ExtResource("2_y8erv")
+view = NodePath("View")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-16, -16, -16, 16, 16, 16, 16, -16)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-16, -16, -16, 16, 16, 16, 16, -16)
+
+[node name="View" type="Node2D" parent="." node_paths=PackedStringArray("character", "hit_area", "attack_area", "attack_animations", "trail_particles", "death_particles", "body_polygon")]
+script = ExtResource("2_7evdk")
+character = NodePath("..")
+hit_area = NodePath("Collision")
+attack_area = NodePath("Hand")
+attack_animations = NodePath("Hand/AttackAnimations")
+trail_particles = NodePath("TrailParticles")
+death_particles = NodePath("DeathParticles")
+body_polygon = NodePath("../Polygon2D")
+
+[node name="Hand" type="Area2D" parent="View"]
+collision_layer = 2
+collision_mask = 2
+input_pickable = false
+monitoring = false
+monitorable = false
+script = ExtResource("4_pslna")
+
+[node name="Polygon2D" type="Polygon2D" parent="View/Hand"]
+color = Color(0.226707, 0.226707, 0.226707, 1)
+polygon = PackedVector2Array(-8, -8, -8, 8, 8, 8, 8, -8)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="View/Hand"]
+polygon = PackedVector2Array(-8, -8, -8, 8, 8, 8, 8, -8)
+
+[node name="AttackAnimations" type="AnimationPlayer" parent="View/Hand"]
+libraries = {
+&"": SubResource("AnimationLibrary_vmnvr")
+}
+
+[node name="TrailParticles" type="CPUParticles2D" parent="View"]
+position = Vector2(0, 14)
+emitting = false
+lifetime = 0.4
+speed_scale = 0.8
+emission_shape = 1
+emission_sphere_radius = 4.0
+direction = Vector2(0, 0)
+gravity = Vector2(0, 0)
+damping_min = 1.0
+damping_max = 1.0
+scale_amount_min = 12.0
+scale_amount_max = 16.0
+scale_amount_curve = SubResource("Curve_7evdk")
+color_ramp = SubResource("Gradient_7evdk")
+
+[node name="DeathParticles" type="CPUParticles2D" parent="View"]
+emitting = false
+amount = 16
+lifetime = 0.6
+speed_scale = 1.2
+explosiveness = 1.0
+lifetime_randomness = 0.4
+emission_shape = 1
+emission_sphere_radius = 32.0
+direction = Vector2(0, 0)
+gravity = Vector2(0, 0)
+damping_min = 1.0
+damping_max = 1.0
+scale_amount_min = 15.0
+scale_amount_max = 30.0
+scale_amount_curve = SubResource("Curve_7evdk")
+color_ramp = SubResource("Gradient_7evdk")
+
+[node name="Collision" type="Area2D" parent="View"]
+input_pickable = false
+monitoring = false
+monitorable = false
+script = ExtResource("5_8nlsj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="View/Collision"]
+shape = SubResource("RectangleShape2D_vk57k")

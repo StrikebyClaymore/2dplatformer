@@ -1,0 +1,68 @@
+# Godot-specific
+.import/
+.export/
+.godot/
+mono/
+data_*/
+export_presets.cfg
+
+# OS/Editor-specific
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+*.exe
+*.dll
+*.pdb
+*.apk
+*.aab
+*.xcodeproj
+*.xcworkspace
+*.so
+*.a
+*.lib
+*.log
+
+# Cache/temp files
+*.tmp
+*.temp
+*.cache
+*.import
+
+# VS Code
+.vscode/
+
+# Rider
+.idea/
+*.sln.iml
+
+# Visual Studio
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.VC.db
+.vs/
+
+# C# specific
+*.csproj
+*.pidb
+*.unityproj
+*.booproj
+*.dll
+*.mdb
+*.pdb
+*.exe
+
+# Other project/IDE metadata
+*.ncb
+*.sdf
+*.opensdf
+*.swp
+*.bak
+*.orig
+*.rej
+*.idb
+*.class
+*.pyc
+__pycache__/

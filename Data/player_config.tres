@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="PlayerConfig" load_steps=2 format=3 uid="uid://hjsacnwmbith"]
+
+[ext_resource type="Script" uid="uid://bcpiufbnnxmvk" path="res://Scripts/Data/PlayerConfig.gd" id="1_3wqg3"]
+
+[resource]
+script = ExtResource("1_3wqg3")
+move_speed = 400.0
+jump_force = 600.0
+gravity = 30.0
+max_jump_count = 1
+double_jump = false
+max_health = 3
+damage = 1
+attack_cooldown_time = 0.1
+death_tween_duration = 0.15
+respawn_tween_duration = 0.3
+metadata/_custom_type_script = "uid://bcpiufbnnxmvk"

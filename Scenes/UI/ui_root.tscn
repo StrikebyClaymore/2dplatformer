@@ -1,0 +1,71 @@
+[gd_scene load_steps=6 format=3 uid="uid://b66wuoju1flra"]
+
+[ext_resource type="Script" uid="uid://xbx3re6whqh8" path="res://Scripts/UI/HUD.gd" id="1_nf4gj"]
+[ext_resource type="Script" uid="uid://dxcu2c7ksrusv" path="res://Scripts/UI/UIRoot.gd" id="1_porug"]
+[ext_resource type="Texture2D" uid="uid://d1ddrdlcxacjk" path="res://Art/Sprites/health_full.tres" id="2_2246s"]
+[ext_resource type="FontFile" uid="uid://c01nl1rrb08l4" path="res://Art/Fonts/LilitaOneRus.ttf" id="3_q7pk6"]
+[ext_resource type="Texture2D" uid="uid://y6mkd52psff" path="res://Art/Sprites/health_empty.tres" id="4_qknim"]
+
+[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("hud")]
+script = ExtResource("1_porug")
+hud = NodePath("HUD")
+
+[node name="BackgroundLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Background" type="ColorRect" parent="BackgroundLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.443137, 0.811765, 0.898039, 1)
+
+[node name="HUD" type="Control" parent="." node_paths=PackedStringArray("health_array")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nf4gj")
+health_array = [NodePath("Health/TextureRect"), NodePath("Health/TextureRect2"), NodePath("Health/TextureRect3")]
+health_full_texture = ExtResource("2_2246s")
+health_empty_texture = ExtResource("4_qknim")
+
+[node name="Health" type="HBoxContainer" parent="HUD"]
+layout_mode = 0
+offset_left = 40.0
+offset_top = 40.0
+offset_right = 104.0
+offset_bottom = 104.0
+
+[node name="TextureRect" type="TextureRect" parent="HUD/Health"]
+layout_mode = 2
+texture = ExtResource("2_2246s")
+
+[node name="TextureRect2" type="TextureRect" parent="HUD/Health"]
+layout_mode = 2
+texture = ExtResource("2_2246s")
+
+[node name="TextureRect3" type="TextureRect" parent="HUD/Health"]
+layout_mode = 2
+texture = ExtResource("2_2246s")
+
+[node name="Label" type="Label" parent="HUD"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -240.0
+offset_top = 40.0
+offset_right = -40.0
+offset_bottom = 80.0
+grow_horizontal = 0
+theme_override_fonts/font = ExtResource("3_q7pk6")
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 2
+vertical_alignment = 1
+clip_text = true

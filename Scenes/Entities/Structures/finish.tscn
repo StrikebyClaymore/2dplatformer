@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://fafucxc50p2l"]
+
+[ext_resource type="Texture2D" uid="uid://04qpshicgef" path="res://Art/Sprites/tilemap_atlas.png" id="1_nm58k"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3mqfk"]
+size = Vector2(32, 48)
+
+[node name="Finish" type="Area2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_nm58k")
+region_enabled = true
+region_rect = Rect2(96, 0, 48, 48)
+region_filter_clip_enabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 0)
+shape = SubResource("RectangleShape2D_3mqfk")
