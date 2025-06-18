@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://bbpavlx23k43q" path="res://Scripts/Features/Entities/Mobs/Player/PlayerController.gd" id="1_jan3b"]
 [ext_resource type="Script" uid="uid://cv2c17ehg85d0" path="res://Scripts/Features/Entities/Mobs/Player/PlayerView.gd" id="2_7evdk"]
 [ext_resource type="Resource" uid="uid://hjsacnwmbith" path="res://Data/player_config.tres" id="2_y8erv"]
-[ext_resource type="Script" uid="uid://bikp01o0euyks" path="res://Scripts/Features/Entities/Mobs/Base/AttackArea.gd" id="4_pslna"]
-[ext_resource type="Script" uid="uid://dowftav61v2a3" path="res://Scripts/Features/Entities/Mobs/Base/HitboxArea.gd" id="5_8nlsj"]
+[ext_resource type="Script" uid="uid://bikp01o0euyks" path="res://Scripts/Features/Entities/Common/AttackArea.gd" id="4_8nlsj"]
+[ext_resource type="Script" uid="uid://dowftav61v2a3" path="res://Scripts/Features/Entities/Common/HitboxArea.gd" id="5_g2785"]
 
 [sub_resource type="Animation" id="Animation_vmnvr"]
 length = 0.001
@@ -80,7 +80,7 @@ collision_mask = 2
 input_pickable = false
 monitoring = false
 monitorable = false
-script = ExtResource("4_pslna")
+script = ExtResource("4_8nlsj")
 
 [node name="Polygon2D" type="Polygon2D" parent="View/Hand"]
 color = Color(0.226707, 0.226707, 0.226707, 1)
@@ -130,7 +130,7 @@ color_ramp = SubResource("Gradient_7evdk")
 
 [node name="Hitbox" type="Area2D" parent="View"]
 input_pickable = false
-script = ExtResource("5_8nlsj")
+script = ExtResource("5_g2785")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="View/Hitbox"]
 shape = SubResource("RectangleShape2D_vk57k")

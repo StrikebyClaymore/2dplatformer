@@ -1,11 +1,11 @@
 [gd_scene load_steps=15 format=3 uid="uid://oqcbopm7iper"]
 
-[ext_resource type="Script" uid="uid://bwmeectrt23ni" path="res://Scripts/Features/Entities/Mobs/Enemies/Base/BaseEnemyController.gd" id="1_5atbh"]
+[ext_resource type="Script" uid="uid://bwmeectrt23ni" path="res://Scripts/Features/Entities/Mobs/Enemies/BaseEnemy/BaseEnemyController.gd" id="1_5atbh"]
 [ext_resource type="Resource" uid="uid://cedbd4gk01i2a" path="res://Data/base_enemy_config.tres" id="2_0oa83"]
-[ext_resource type="Script" uid="uid://cllqvmn78vbqd" path="res://Scripts/Features/Entities/Mobs/Enemies/Base/BaseEnemyView.gd" id="2_cfjg6"]
-[ext_resource type="Script" uid="uid://bikp01o0euyks" path="res://Scripts/Features/Entities/Mobs/Base/AttackArea.gd" id="3_r4qer"]
-[ext_resource type="Script" uid="uid://dowftav61v2a3" path="res://Scripts/Features/Entities/Mobs/Base/HitboxArea.gd" id="5_gb5ax"]
-[ext_resource type="Script" uid="uid://cwcrlgpu00jwq" path="res://Scripts/Features/Entities/Mobs/Base/DetectArea.gd" id="5_mhsoi"]
+[ext_resource type="Script" uid="uid://cllqvmn78vbqd" path="res://Scripts/Features/Entities/Mobs/Enemies/BaseEnemy/BaseEnemyView.gd" id="2_cfjg6"]
+[ext_resource type="Script" uid="uid://bikp01o0euyks" path="res://Scripts/Features/Entities/Common/AttackArea.gd" id="3_r4qer"]
+[ext_resource type="Script" uid="uid://dowftav61v2a3" path="res://Scripts/Features/Entities/Common/HitboxArea.gd" id="5_mhsoi"]
+[ext_resource type="Script" uid="uid://cwcrlgpu00jwq" path="res://Scripts/Features/Entities/Common/DetectArea.gd" id="6_gb5ax"]
 
 [sub_resource type="Animation" id="Animation_vmnvr"]
 length = 0.001
@@ -144,7 +144,7 @@ color_ramp = SubResource("Gradient_7evdk")
 collision_layer = 2
 collision_mask = 2
 input_pickable = false
-script = ExtResource("5_gb5ax")
+script = ExtResource("5_mhsoi")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="View/Hitbox"]
 shape = SubResource("RectangleShape2D_vk57k")
@@ -161,7 +161,7 @@ collision_mask = 4
 
 [node name="DetectArea" type="Area2D" parent="."]
 input_pickable = false
-script = ExtResource("5_mhsoi")
+script = ExtResource("6_gb5ax")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectArea"]
 position = Vector2(0, -40)
@@ -169,7 +169,7 @@ shape = SubResource("RectangleShape2D_mhsoi")
 
 [node name="FightArea" type="Area2D" parent="."]
 input_pickable = false
-script = ExtResource("5_mhsoi")
+script = ExtResource("6_gb5ax")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FightArea"]
 shape = SubResource("RectangleShape2D_gb5ax")

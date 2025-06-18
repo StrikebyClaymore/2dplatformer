@@ -15,7 +15,6 @@ func _init(_fsm: EnemyStateMachine, _config : BaseEnemyConfig, _view: BaseEnemyV
 	pass
 
 func enter() -> void:
-	print("EnemyFightState")
 	target = fsm.target
 	view.fight_area.connect("body_exited", self.on_fight_area_body_exited)
 	pass
@@ -32,7 +31,12 @@ func process(delta: float) -> void:
 func physics_process(delta: float) -> void:
 	pass
 
-func on_fight_area_body_exited(body: Node2D):
+func on_fight_area_body_exited(body: Node2D) -> void:
 	if body == target:
 		fsm.target = null
-		fsm.enter("EnemyPatrolState")
+		exit_delay()
+
+func exit_delay() -> void:
+	while attack.is_attacking:
+		await view.get_tree().process_frame
+	fsm.enter("EnemyPatrolState")

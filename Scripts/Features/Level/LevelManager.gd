@@ -22,9 +22,9 @@ func _on_finish_body_entered(body: Node2D) -> void:
 	if body is PlayerController:
 		level_completed()
 
-func level_completed():
+func level_completed() -> void:
 	SceneLoader.load_scene_from_path(next_scene_name)
 
-func on_player_died():
+func on_player_died() -> void:
 	SceneLoader.load_scene_from_path(current_scene_name)
 	pass

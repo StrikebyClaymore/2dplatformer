@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=4 uid="uid://bxphb2ncviilp"]
 
-[ext_resource type="Script" path="res://Scripts/Infrastructure/Services/LevelManager.gd" id="1_3mqfk"]
+[ext_resource type="Script" uid="uid://d0hmpb17n1wwe" path="res://Scripts/Features/Level/LevelManager.gd" id="1_3mqfk"]
 [ext_resource type="TileSet" uid="uid://cplfqxix8ravb" path="res://Art/Tilemaps/level_1_tileset.tres" id="1_vk57k"]
 [ext_resource type="PackedScene" uid="uid://beb4gcn3u16du" path="res://Scenes/Entities/Mobs/player.tscn" id="2_4dpyx"]
 [ext_resource type="PackedScene" uid="uid://fafucxc50p2l" path="res://Scenes/Entities/Structures/finish.tscn" id="4_iixi8"]
@@ -25,7 +25,7 @@ tile_map_data = PackedByteArray("AAAAAAAAAAABAAAAAAAAAAEAAAAAAAAAAAAAAAIAAAAAAAA
 tile_set = ExtResource("1_vk57k")
 
 [node name="SpawnPoint" type="Node2D" parent="Environment"]
-position = Vector2(176, -160)
+position = Vector2(176, -224)
 
 [node name="Finish" parent="Environment" instance=ExtResource("4_iixi8")]
 position = Vector2(117, -375)

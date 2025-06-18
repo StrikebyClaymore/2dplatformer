@@ -38,7 +38,7 @@ func attack_cooldown_timer() -> void:
 	await view.get_tree().create_timer(config.attack_cooldown_time).timeout
 	is_attack_cooldown = false
 
-func on_hit_area_entered(area: Area2D):
+func on_hit_area_entered(area: Area2D) -> void:
 	if area is HitboxArea and area.group == EntityGroups.Groups.PLAYER:
 		if area in hit_targets:
 			return

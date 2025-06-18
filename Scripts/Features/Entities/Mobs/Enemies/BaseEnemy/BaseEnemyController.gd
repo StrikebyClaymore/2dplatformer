@@ -26,7 +26,7 @@ func _physics_process(delta: float) -> void:
 	fsm.physics_process(delta)
 	pass
 
-func death_tween():
+func death_tween() -> void:
 	var tween = self.create_tween()
 	tween.tween_property(self, "scale", Vector2.ZERO, config.death_tween_duration)
 	await tween.finished

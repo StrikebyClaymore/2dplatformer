@@ -36,11 +36,11 @@ func handle_debug_keys(event: InputEvent) -> void:
 		if event.get_keycode() == KEY_R:
 			get_tree().reload_current_scene()
 
-func death_tween():
+func death_tween() -> void:
 	var tween = self.create_tween()
 	tween.tween_property(self, "scale", Vector2.ZERO, config.death_tween_duration)
 
-func respawn_tween():
+func respawn_tween() -> void:
 	self.scale = Vector2.ZERO
 	var tween = self.create_tween()
 	tween.stop(); 

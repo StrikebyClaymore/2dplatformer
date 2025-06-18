@@ -17,4 +17,3 @@ class_name BaseEnemyConfig
 @export var group : EntityGroups.Groups = EntityGroups.Groups.ENEMY
 @export var death_tween_duration : float = 0.15
 @export var chase_stop_distance : float = 0.15
-@export var exit_fight_delay : float = 0.4

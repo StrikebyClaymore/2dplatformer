@@ -16,7 +16,6 @@ func _init(_fsm: EnemyStateMachine, _config : BaseEnemyConfig, _view: BaseEnemyV
 	pass
 
 func enter() -> void:
-	print("EnemyChaseState")
 	target = fsm.target
 	view.enemy_detector_area.connect("body_exited", self.on_enemy_detector_body_exited)
 	view.fight_area.connect("body_entered", self.on_fight_area_body_entered)
@@ -44,11 +43,11 @@ func physics_process(delta: float) -> void:
 		movement.physics_process(delta)
 	pass
 
-func on_enemy_detector_body_exited(body: Node2D):
+func on_enemy_detector_body_exited(body: Node2D) -> void:
 	if body == target:
 		fsm.target = null
 		fsm.enter("EnemyPatrolState")
 
-func on_fight_area_body_entered(body: Node2D):
+func on_fight_area_body_entered(body: Node2D) -> void:
 	if body is PlayerController:
 		fsm.enter("EnemyFightState")
