@@ -1,15 +1,17 @@
-[gd_scene load_steps=6 format=3 uid="uid://b66wuoju1flra"]
+[gd_scene load_steps=9 format=3 uid="uid://b66wuoju1flra"]
 
 [ext_resource type="Script" uid="uid://xbx3re6whqh8" path="res://Scripts/UI/HUD.gd" id="1_nf4gj"]
 [ext_resource type="Script" uid="uid://dxcu2c7ksrusv" path="res://Scripts/UI/UIRoot.gd" id="1_porug"]
 [ext_resource type="FontFile" uid="uid://c01nl1rrb08l4" path="res://Art/Fonts/LilitaOneRus.ttf" id="3_q7pk6"]
+[ext_resource type="Script" uid="uid://cj7nsoib6xslc" path="res://Scripts/UI/LoseScreen.gd" id="4_porug"]
+[ext_resource type="PackedScene" uid="uid://o1oht7uvvcty" path="res://Scenes/UI/base_button.tscn" id="5_qknim"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_porug"]
 bg_color = Color(0.7, 0.7, 0.7, 0.772549)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7lvq6"]
 bg_color = Color(0.862745, 0, 0, 1)
@@ -18,9 +20,22 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("hud")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qknim"]
+bg_color = Color(0.882353, 0.760784, 0.54902, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.72185, 0.490096, 0.231702, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+
+[node name="UI" type="CanvasLayer" node_paths=PackedStringArray("hud", "lose_screen")]
 script = ExtResource("1_porug")
 hud = NodePath("HUD")
+lose_screen = NodePath("LoseScreen")
 
 [node name="BackgroundLayer" type="CanvasLayer" parent="."]
 layer = -1
@@ -31,19 +46,22 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0.443137, 0.811765, 0.898039, 1)
 
-[node name="HUD" type="Control" parent="." node_paths=PackedStringArray("health_bar")]
+[node name="HUD" type="Control" parent="." node_paths=PackedStringArray("score_label", "health_bar")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 script = ExtResource("1_nf4gj")
+score_label = NodePath("Score Label")
 health_bar = NodePath("ProgressBar")
 
-[node name="Label" type="Label" parent="HUD"]
+[node name="Score Label" type="Label" parent="HUD"]
 modulate = Color(0, 0, 0, 1)
 layout_mode = 1
 anchors_preset = 1
@@ -67,8 +85,90 @@ offset_left = 40.0
 offset_top = 40.0
 offset_right = 340.0
 offset_bottom = 80.0
+mouse_filter = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_porug")
 theme_override_styles/fill = SubResource("StyleBoxFlat_7lvq6")
 value = 50.0
 rounded = true
 show_percentage = false
+
+[node name="LoseScreen" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("4_porug")
+
+[node name="Background" type="ColorRect" parent="LoseScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.607843)
+
+[node name="Panel" type="Control" parent="LoseScreen"]
+layout_mode = 1
+anchor_left = 0.24
+anchor_top = 0.191
+anchor_right = 0.76
+anchor_bottom = 0.809
+offset_left = -0.480011
+offset_top = 0.231987
+offset_right = 0.479919
+offset_bottom = -0.231995
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(300, 200)
+
+[node name="Background" type="Panel" parent="LoseScreen/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.083
+anchor_right = 0.917
+anchor_bottom = 1.0
+offset_left = 0.199997
+offset_right = -0.200012
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_qknim")
+
+[node name="Label" type="Label" parent="LoseScreen/Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.15
+anchor_top = 0.1
+anchor_right = 0.85
+anchor_bottom = 0.205
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_q7pk6")
+theme_override_font_sizes/font_size = 36
+text = "ПОРАЖЕНИЕ"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Restart Button" parent="LoseScreen/Panel" instance=ExtResource("5_qknim")]
+layout_mode = 1
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="Exit Button" parent="LoseScreen/Panel" instance=ExtResource("5_qknim")]
+layout_mode = 1
+anchor_top = 0.55
+anchor_bottom = 0.7
+offset_bottom = -3.05176e-05
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="Label" parent="LoseScreen/Panel/Exit Button" index="0"]
+text = "ВЫХОД"
+
+[connection signal="pressed" from="LoseScreen/Panel/Restart Button" to="LoseScreen" method="_on_restart_button_pressed"]
+[connection signal="pressed" from="LoseScreen/Panel/Exit Button" to="LoseScreen" method="_on_exit_button_pressed"]
+
+[editable path="LoseScreen/Panel/Exit Button"]

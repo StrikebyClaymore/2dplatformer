@@ -61,8 +61,8 @@ size = Vector2(192, 112)
 size = Vector2(64, 32)
 
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("view")]
-collision_layer = 2
-collision_mask = 2
+collision_layer = 0
+collision_mask = 0
 script = ExtResource("1_5atbh")
 config = ExtResource("2_0oa83")
 view = NodePath("View")

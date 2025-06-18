@@ -1,0 +1,62 @@
+[gd_scene load_steps=4 format=3 uid="uid://o1oht7uvvcty"]
+
+[ext_resource type="FontFile" uid="uid://c01nl1rrb08l4" path="res://Art/Fonts/LilitaOneRus.ttf" id="1_t1486"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ab2vg"]
+bg_color = Color(0.2916, 0.81, 0.38664, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.73, 0.58181, 0.0949, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 3
+shadow_offset = Vector2(1.5, 3)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t1486"]
+bg_color = Color(0.2592, 0.72, 0.34368, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.73, 0.58181, 0.0949, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 3
+shadow_offset = Vector2(1.5, 3)
+
+[node name="Restart Button" type="Button"]
+anchors_preset = -1
+anchor_left = 0.3
+anchor_top = 0.3
+anchor_right = 0.7
+anchor_bottom = 0.45
+offset_right = -3.05176e-05
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/focus = SubResource("StyleBoxFlat_ab2vg")
+theme_override_styles/hover = SubResource("StyleBoxFlat_t1486")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_ab2vg")
+theme_override_styles/normal = SubResource("StyleBoxFlat_ab2vg")
+metadata/_edit_group_ = true
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(-2, -2)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_t1486")
+theme_override_font_sizes/font_size = 28
+text = "ЗАНОВО"
+horizontal_alignment = 1
+vertical_alignment = 1
