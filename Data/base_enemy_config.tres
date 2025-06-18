@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="BaseEnemyConfig" load_steps=2 format=3 uid="uid://cedbd4gk01i2a"]
+
+[ext_resource type="Script" uid="uid://d4brvxvp1v6tr" path="res://Scripts/Data/BaseEnemyConfig.gd" id="1_y02b0"]
+
+[resource]
+script = ExtResource("1_y02b0")
+move_speed = 100.0
+max_health = 2
+take_damage_color = Color(1, 0, 0, 1)
+take_damage_tween_duration = 0.1
+damage = 1
+attack_cooldown_time = 1.0
+group = 1
+death_tween_duration = 0.15
+chase_stop_distance = 0.05

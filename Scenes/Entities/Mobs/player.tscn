@@ -1,10 +1,10 @@
 [gd_scene load_steps=12 format=3 uid="uid://beb4gcn3u16du"]
 
-[ext_resource type="Script" uid="uid://bbpavlx23k43q" path="res://Scripts/Entities/Mobs/Player/PlayerController.gd" id="1_jan3b"]
-[ext_resource type="Script" uid="uid://cv2c17ehg85d0" path="res://Scripts/Entities/Mobs/Player/PlayerView.gd" id="2_7evdk"]
+[ext_resource type="Script" uid="uid://bbpavlx23k43q" path="res://Scripts/Features/Entities/Mobs/Player/PlayerController.gd" id="1_jan3b"]
+[ext_resource type="Script" uid="uid://cv2c17ehg85d0" path="res://Scripts/Features/Entities/Mobs/Player/PlayerView.gd" id="2_7evdk"]
 [ext_resource type="Resource" uid="uid://hjsacnwmbith" path="res://Data/player_config.tres" id="2_y8erv"]
-[ext_resource type="Script" uid="uid://bikp01o0euyks" path="res://Scripts/Entities/Mobs/Base/AttackArea.gd" id="4_pslna"]
-[ext_resource type="Script" uid="uid://bp84eqxhvxk7c" path="res://Scripts/Entities/Mobs/Base/HitArea.gd" id="5_8nlsj"]
+[ext_resource type="Script" uid="uid://bikp01o0euyks" path="res://Scripts/Features/Entities/Mobs/Base/AttackArea.gd" id="4_pslna"]
+[ext_resource type="Script" uid="uid://dowftav61v2a3" path="res://Scripts/Features/Entities/Mobs/Base/HitboxArea.gd" id="5_8nlsj"]
 
 [sub_resource type="Animation" id="Animation_vmnvr"]
 length = 0.001
@@ -67,7 +67,7 @@ polygon = PackedVector2Array(-16, -16, -16, 16, 16, 16, 16, -16)
 [node name="View" type="Node2D" parent="." node_paths=PackedStringArray("character", "hit_area", "attack_area", "attack_animations", "trail_particles", "death_particles", "body_polygon")]
 script = ExtResource("2_7evdk")
 character = NodePath("..")
-hit_area = NodePath("Collision")
+hit_area = NodePath("Hitbox")
 attack_area = NodePath("Hand")
 attack_animations = NodePath("Hand/AttackAnimations")
 trail_particles = NodePath("TrailParticles")
@@ -128,11 +128,9 @@ scale_amount_max = 30.0
 scale_amount_curve = SubResource("Curve_7evdk")
 color_ramp = SubResource("Gradient_7evdk")
 
-[node name="Collision" type="Area2D" parent="View"]
+[node name="Hitbox" type="Area2D" parent="View"]
 input_pickable = false
-monitoring = false
-monitorable = false
 script = ExtResource("5_8nlsj")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="View/Collision"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="View/Hitbox"]
 shape = SubResource("RectangleShape2D_vk57k")

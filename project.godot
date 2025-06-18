@@ -13,13 +13,13 @@ config_version=5
 config/name="2DPlatformer"
 run/main_scene="uid://bxphb2ncviilp"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://Art/Sprites/icon.svg"
+config/icon="uid://mst4s1ff45qs"
 
 [autoload]
 
-AudioManager="*res://Scripts/Services/AudioManager.gd"
+AudioManager="*res://Scripts/Infrastructure/Services/AudioManager.gd"
 SceneLoader="*res://Scenes/Services/scene_loader.tscn"
-EntityGroups="*res://Scripts/Entities/EntityGroups.gd"
+EntityGroups="*res://Scripts/Features/Entities/EntityGroups.gd"
 
 [input]
 
@@ -44,6 +44,10 @@ Attack={
 , Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"canceled":false,"pressed":false,"double_click":false,"script":null)
 ]
 }
+
+[physics]
+
+2d/default_gravity=2100.0
 
 [rendering]
 

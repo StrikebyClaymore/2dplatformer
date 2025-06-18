@@ -5,13 +5,15 @@
 [resource]
 script = ExtResource("1_3wqg3")
 move_speed = 400.0
-jump_force = 600.0
-gravity = 30.0
+jump_force = 620.0
 max_jump_count = 1
 double_jump = false
-max_health = 3
+max_health = 30
+take_damage_color = Color(1, 0, 0, 1)
+take_damage_tween_duration = 0.1
 damage = 1
 attack_cooldown_time = 0.1
+group = 0
 death_tween_duration = 0.15
 respawn_tween_duration = 0.3
 metadata/_custom_type_script = "uid://bcpiufbnnxmvk"

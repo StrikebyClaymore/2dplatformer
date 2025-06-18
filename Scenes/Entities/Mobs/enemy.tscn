@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://oqcbopm7iper"]
+[gd_scene load_steps=15 format=3 uid="uid://oqcbopm7iper"]
 
-[ext_resource type="Script" uid="uid://bq05akq474o0j" path="res://Scripts/Entities/Mobs/Enemies/CubeEnemy/CubeEnemyController.gd" id="1_5atbh"]
-[ext_resource type="Resource" uid="uid://cedbd4gk01i2a" path="res://Data/cube_enemy_config.tres" id="2_0oa83"]
-[ext_resource type="Script" uid="uid://4wkivu5tmdxd" path="res://Scripts/Entities/Mobs/Enemies/CubeEnemy/CubeEnemyView.gd" id="2_cfjg6"]
-[ext_resource type="Script" uid="uid://bikp01o0euyks" path="res://Scripts/Entities/Mobs/Base/AttackArea.gd" id="3_r4qer"]
-[ext_resource type="Script" uid="uid://bp84eqxhvxk7c" path="res://Scripts/Entities/Mobs/Base/HitArea.gd" id="5_mhsoi"]
+[ext_resource type="Script" uid="uid://bwmeectrt23ni" path="res://Scripts/Features/Entities/Mobs/Enemies/Base/BaseEnemyController.gd" id="1_5atbh"]
+[ext_resource type="Resource" uid="uid://cedbd4gk01i2a" path="res://Data/base_enemy_config.tres" id="2_0oa83"]
+[ext_resource type="Script" uid="uid://cllqvmn78vbqd" path="res://Scripts/Features/Entities/Mobs/Enemies/Base/BaseEnemyView.gd" id="2_cfjg6"]
+[ext_resource type="Script" uid="uid://bikp01o0euyks" path="res://Scripts/Features/Entities/Mobs/Base/AttackArea.gd" id="3_r4qer"]
+[ext_resource type="Script" uid="uid://dowftav61v2a3" path="res://Scripts/Features/Entities/Mobs/Base/HitboxArea.gd" id="5_gb5ax"]
+[ext_resource type="Script" uid="uid://cwcrlgpu00jwq" path="res://Scripts/Features/Entities/Mobs/Base/DetectArea.gd" id="5_mhsoi"]
 
 [sub_resource type="Animation" id="Animation_vmnvr"]
 length = 0.001
@@ -53,6 +54,12 @@ colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vk57k"]
 size = Vector2(32, 32)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mhsoi"]
+size = Vector2(192, 112)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gb5ax"]
+size = Vector2(64, 32)
+
 [node name="Enemy" type="CharacterBody2D" node_paths=PackedStringArray("view")]
 collision_layer = 2
 collision_mask = 2
@@ -66,15 +73,19 @@ polygon = PackedVector2Array(-16, -16, -16, 16, 16, 16, 16, -16)
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-16, -16, -16, 16, 16, 16, 16, -16)
 
-[node name="View" type="Node2D" parent="." node_paths=PackedStringArray("character", "hit_area", "attack_area", "attack_animations", "trail_particles", "death_particles", "body_polygon")]
+[node name="View" type="Node2D" parent="." node_paths=PackedStringArray("character", "body_polygon", "hit_area", "floor_detector_left", "floor_detector_right", "attack_area", "attack_animations", "trail_particles", "death_particles", "enemy_detector_area", "fight_area")]
 script = ExtResource("2_cfjg6")
 character = NodePath("..")
-hit_area = NodePath("Collision")
+body_polygon = NodePath("../Polygon2D")
+hit_area = NodePath("Hitbox")
+floor_detector_left = NodePath("../FloorDetectorLeft")
+floor_detector_right = NodePath("../FloorDetectorRight")
 attack_area = NodePath("Hand")
 attack_animations = NodePath("Hand/AttackAnimations")
 trail_particles = NodePath("TrailParticles")
 death_particles = NodePath("DeathParticles")
-body_polygon = NodePath("../Polygon2D")
+enemy_detector_area = NodePath("../DetectArea")
+fight_area = NodePath("../FightArea")
 
 [node name="Hand" type="Area2D" parent="View"]
 input_pickable = false
@@ -97,6 +108,7 @@ libraries = {
 [node name="TrailParticles" type="CPUParticles2D" parent="View"]
 position = Vector2(0, 14)
 emitting = false
+amount = 2
 lifetime = 0.4
 speed_scale = 0.8
 emission_shape = 1
@@ -128,13 +140,36 @@ scale_amount_max = 30.0
 scale_amount_curve = SubResource("Curve_7evdk")
 color_ramp = SubResource("Gradient_7evdk")
 
-[node name="Collision" type="Area2D" parent="View"]
+[node name="Hitbox" type="Area2D" parent="View"]
 collision_layer = 2
 collision_mask = 2
 input_pickable = false
-monitoring = false
-monitorable = false
+script = ExtResource("5_gb5ax")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="View/Hitbox"]
+shape = SubResource("RectangleShape2D_vk57k")
+
+[node name="FloorDetectorLeft" type="RayCast2D" parent="."]
+position = Vector2(-16, 0)
+target_position = Vector2(0, 25)
+collision_mask = 4
+
+[node name="FloorDetectorRight" type="RayCast2D" parent="."]
+position = Vector2(16, 0)
+target_position = Vector2(0, 25)
+collision_mask = 4
+
+[node name="DetectArea" type="Area2D" parent="."]
+input_pickable = false
 script = ExtResource("5_mhsoi")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="View/Collision"]
-shape = SubResource("RectangleShape2D_vk57k")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectArea"]
+position = Vector2(0, -40)
+shape = SubResource("RectangleShape2D_mhsoi")
+
+[node name="FightArea" type="Area2D" parent="."]
+input_pickable = false
+script = ExtResource("5_mhsoi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FightArea"]
+shape = SubResource("RectangleShape2D_gb5ax")

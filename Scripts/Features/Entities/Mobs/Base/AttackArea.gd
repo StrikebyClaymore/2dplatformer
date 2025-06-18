@@ -1,0 +1,2 @@
+extends DetectArea
+class_name AttackArea

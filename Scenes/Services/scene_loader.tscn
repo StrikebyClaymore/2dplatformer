@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://phvflxx6w2so"]
 
-[ext_resource type="Script" uid="uid://baogly6fktkuj" path="res://Scripts/Services/SceneLoader.gd" id="1_ps2a3"]
+[ext_resource type="Script" uid="uid://baogly6fktkuj" path="res://Scripts/Infrastructure/Services/SceneLoader.gd" id="1_ps2a3"]
 
 [sub_resource type="Animation" id="Animation_ps2a3"]
 resource_name = "fade"
