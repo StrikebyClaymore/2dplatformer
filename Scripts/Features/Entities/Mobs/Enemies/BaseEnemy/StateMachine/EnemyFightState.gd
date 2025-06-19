@@ -37,7 +37,12 @@ func on_fight_area_body_exited(body: Node2D) -> void:
 		exit_delay()
 
 func exit_delay() -> void:
-	while is_instance_valid(view) and attack.is_attacking:
-		await view.get_tree().process_frame
-	if is_instance_valid(view):
-		fsm.enter("EnemyPatrolState")
+	if attack.is_attacking:
+		attack.attack_finished.connect(self.on_exit_delay_finished)
+	else:
+		on_exit_delay_finished()
+
+func on_exit_delay_finished():
+	if attack.attack_finished.is_connected(self.on_exit_delay_finished):
+		attack.attack_finished.disconnect(self.on_exit_delay_finished)
+	fsm.enter("EnemyPatrolState")

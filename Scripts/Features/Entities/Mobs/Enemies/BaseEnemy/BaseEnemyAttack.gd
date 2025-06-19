@@ -7,6 +7,7 @@ var view : BaseEnemyView
 var is_attacking : bool
 var is_attack_cooldown: bool
 var hit_targets : Array[Area2D] = []
+signal attack_finished
 
 func init(_config: BaseEnemyConfig, _view: BaseEnemyView) -> void:
 	self.config = _config
@@ -32,6 +33,7 @@ func on_animation_finished(anim_name: String) -> void:
 	is_attack_cooldown = true
 	view.attack_area.disable()
 	hit_targets.clear()
+	emit_signal("attack_finished")
 	attack_cooldown_timer()
 
 func attack_cooldown_timer() -> void:
